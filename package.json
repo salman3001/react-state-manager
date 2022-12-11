@@ -1,0 +1,40 @@
+{
+  "name": "@salman3001/react-state-manager",
+  "version": "1.0.5",
+  "description": "A simple package to manage the global state in react in easy way!",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salman3001/react-state-manager.git"
+  },
+  "keywords": [
+    "react",
+    "global",
+    "state",
+    "manager",
+    "react",
+    "context",
+    "redux",
+    "react",
+    "useReducer"
+  ],
+  "author": "Salman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/salman3001/react-state-manager/issues"
+  },
+  "homepage": "https://github.com/salman3001/react-state-manager#readme",
+  "devDependencies": {
+    "@types/react": "^18.0.26",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.9.4"
+  },
+  "files": [
+    "/lib"
+  ]
+}
