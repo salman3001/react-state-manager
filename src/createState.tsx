@@ -1,25 +1,23 @@
-import { createContext, useReducer } from "react"
+import React, { createContext, ReactNode, useContext, useReducer } from 'react'
 
-export default function createState<I, A>(initialState: I, redcuerFunction: (state: I, action: A) => I) {
+export default function createState<I, A>(
+  initialState: I,
+  reducerFn: (state: I, action: A) => I,
+): [({ children }: { children: ReactNode }) => JSX.Element, () => [I, (action: A) => void]] {
+  const state = initialState
 
-    const [state, dispatch] = useReducer(redcuerFunction, initialState)
-    const stateContext = initialState
-    const dispatchContext = (action:A)=>{}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
+  const Store = createContext({ state, dispatch: (action: A) => {} })
 
-    return [
-        contextCreator,
-        state,
-        dispatch
-    ]
-}
+  const StoreProvider = ({ children }: { children: ReactNode }) => {
+    const [state, dispatch] = useReducer(reducerFn, initialState)
+    return <Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>
+  }
 
-const cart = createState({ name: "sallu" }, (state, action) => {
-    return state
-})
+  const useStore = (): [I, (action: A) => void] => {
+    const { state, dispatch } = useContext(Store)
+    return [state, dispatch]
+  }
 
-
-const [cartContext,cartState,cartDispatch] = cart
-
-function createStore(contextArr,stateArr,dispatchArr){
- const store =createContext()
+  return [StoreProvider, useStore]
 }
